@@ -1,0 +1,76 @@
+# ASP.NET Core (.NET Framework)
+# Build and test ASP.NET Core projects targeting the full .NET Framework.
+# Add steps that publish symbols, save build artifacts, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- release/dev
+
+pool:
+  vmImage: 'windows-latest'
+
+# variables:
+#   solution: '**/*.sln'
+#   buildPlatform: 'Any CPU'
+#   buildConfiguration: 'Release'
+variables:
+  ProjectName: 'BinusSchool.Shared.Kernel'
+  ProjectPath: '**/BinusSchool.Shared.Kernel.csproj'
+  buildConfiguration: 'Release'
+
+steps:
+  - task: UseDotNet@2
+    displayName: 'Install .NET Core SDK'
+    inputs:
+      packageType: 'sdk'
+      version: '6.x'
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'dotnet restore'
+    inputs:
+      command: 'restore'
+      projects: '$(ProjectPath)'
+      feedsToUse: 'config'
+      nugetConfigPath: './NuGet.config'
+
+  # - task: NuGetCommand@2
+  #   displayName: 'dotnet restore'
+  #   inputs:
+  #     command: restore                      
+  #     restoreSolution: '**/*.sln'             ## Required when command = restore. Path to solution, packages.config, or project.json. Default: **/*.sln.
+  #     feedsToUse: 'select'
+  #     nugetConfigPath: 'NuGet.config'
+  #     includeNuGetOrg: true
+  
+  - task: DotNetCoreCLI@2
+    displayName: 'Build $(ProjectName)'
+    inputs:
+      command: 'build'
+      arguments: '--configuration $(buildConfiguration)'
+      projects: '$(ProjectPath)'
+
+  - task: DotNetCoreCLI@2
+    displayName: 'Pack $(ProjectName)'
+    inputs:
+      command: 'pack'
+      arguments: '--configuration $(buildConfiguration)'
+      packagesToPack: '$(ProjectPath)'
+      nobuild: true
+      versioningScheme: 'off'
+
+  - task: NuGetAuthenticate@1
+    inputs:
+      nuGetServiceConnections: 'azure-pipeline-artifact'
+
+  - task: NuGetCommand@2
+    displayName: 'Publish $(ProjectName)'
+    inputs:
+      command: push
+      feedsToUse: 'select'
+      packagesToPush: '$(Build.ArtifactStagingDirectory)/**/*.nupkg;!$(Build.ArtifactStagingDirectory)/**/*.symbols.nupkg'
+      nuGetFeedType: 'internal'
+      # publishVstsFeed: 'b9d073f7-cf2d-44a6-9eb6-e49a9e3857a3/319e0ea3-6bea-4e0a-8e63-46b51cd7c4f5'
+      # publishVstsFeed: 'BSSDEX/BinusSchool.SharedKernel.Feed'
+      publishVstsFeed: 'BinusSchool.SharedKernel.Dev'
+      versioningScheme: 'off'
+      allowPackageConflicts: true

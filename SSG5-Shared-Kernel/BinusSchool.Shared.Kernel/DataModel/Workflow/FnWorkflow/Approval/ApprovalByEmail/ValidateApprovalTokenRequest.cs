@@ -1,0 +1,11 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Text;
+
+namespace BinusSchool.Data.Model.Workflow.FnWorkflow.Approval.ApprovalByEmail
+{
+    public class ValidateApprovalTokenRequest
+    {
+        public string ActionKey { get; set; }
+    }
+}
