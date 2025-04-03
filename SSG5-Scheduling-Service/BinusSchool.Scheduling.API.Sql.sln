@@ -1,0 +1,79 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.BLL", "BinusSchool.Scheduling.BLL\BinusSchool.Scheduling.BLL.csproj", "{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.DAL", "BinusSchool.Scheduling.DAL\BinusSchool.Scheduling.DAL.csproj", "{764A5494-B1F2-4DE9-9E67-091D4B494F0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.Kernel", "BinusSchool.Scheduling.Kernel\BinusSchool.Scheduling.Kernel.csproj", "{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnSchedule.FrontEndAPI", "BinusSchool.Scheduling.FnSchedule.FrontEndAPI\BinusSchool.Scheduling.FnSchedule.FrontEndAPI.csproj", "{6FEE3DB8-7131-4A48-A620-8931FEECB2F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnActivities.FrontEndAPI", "BinusSchool.Scheduling.FnActivities.FrontEndAPI\BinusSchool.Scheduling.FnActivities.FrontEndAPI.csproj", "{047106AC-D5D0-4368-8115-E7348676746C}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnAscTimetable.FrontEndAPI", "BinusSchool.Scheduling.FnAscTimetable.FrontEndAPI\BinusSchool.Scheduling.FnAscTimetable.FrontEndAPI.csproj", "{15B7376E-A8B7-41A8-A0DB-CAB4798E4489}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnExtracurricular.FrontEndAPI", "BinusSchool.Scheduling.FnExtracurricular.FrontEndAPI\BinusSchool.Scheduling.FnExtracurricular.FrontEndAPI.csproj", "{03DB6648-19DD-4F77-A887-D944FFB8EF5E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnMovingStudent.FrontEndAPI", "BinusSchool.Scheduling.FnMovingStudent.FrontEndAPI\BinusSchool.Scheduling.FnMovingStudent.FrontEndAPI.csproj", "{36586EDB-7D56-43D5-A82F-91B6FB85FB61}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnSync.BackEndAPI", "BinusSchool.Scheduling.FnSync.BackEndAPI\BinusSchool.Scheduling.FnSync.BackEndAPI.csproj", "{732FE515-7C70-44E3-8693-C4F37E8D0070}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Scheduling.FnLongRun.BackEndAPI", "BinusSchool.Scheduling.FnLongRun.BackEndAPI\BinusSchool.Scheduling.FnLongRun.BackEndAPI.csproj", "{DC3B9077-3595-4CF2-8C3F-FBBBFF2214B0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6FEE3DB8-7131-4A48-A620-8931FEECB2F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6FEE3DB8-7131-4A48-A620-8931FEECB2F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6FEE3DB8-7131-4A48-A620-8931FEECB2F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6FEE3DB8-7131-4A48-A620-8931FEECB2F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{047106AC-D5D0-4368-8115-E7348676746C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{047106AC-D5D0-4368-8115-E7348676746C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{047106AC-D5D0-4368-8115-E7348676746C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{047106AC-D5D0-4368-8115-E7348676746C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{15B7376E-A8B7-41A8-A0DB-CAB4798E4489}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{15B7376E-A8B7-41A8-A0DB-CAB4798E4489}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{15B7376E-A8B7-41A8-A0DB-CAB4798E4489}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{15B7376E-A8B7-41A8-A0DB-CAB4798E4489}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03DB6648-19DD-4F77-A887-D944FFB8EF5E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03DB6648-19DD-4F77-A887-D944FFB8EF5E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03DB6648-19DD-4F77-A887-D944FFB8EF5E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03DB6648-19DD-4F77-A887-D944FFB8EF5E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36586EDB-7D56-43D5-A82F-91B6FB85FB61}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36586EDB-7D56-43D5-A82F-91B6FB85FB61}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36586EDB-7D56-43D5-A82F-91B6FB85FB61}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36586EDB-7D56-43D5-A82F-91B6FB85FB61}.Release|Any CPU.Build.0 = Release|Any CPU
+		{732FE515-7C70-44E3-8693-C4F37E8D0070}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{732FE515-7C70-44E3-8693-C4F37E8D0070}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{732FE515-7C70-44E3-8693-C4F37E8D0070}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{732FE515-7C70-44E3-8693-C4F37E8D0070}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC3B9077-3595-4CF2-8C3F-FBBBFF2214B0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC3B9077-3595-4CF2-8C3F-FBBBFF2214B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC3B9077-3595-4CF2-8C3F-FBBBFF2214B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC3B9077-3595-4CF2-8C3F-FBBBFF2214B0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC8BF807-DD14-4F24-9CD3-71ECED4CF1F7}
+	EndGlobalSection
+EndGlobal

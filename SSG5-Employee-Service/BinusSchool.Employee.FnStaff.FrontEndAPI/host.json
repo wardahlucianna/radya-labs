@@ -1,0 +1,25 @@
+{
+  "version": "2.0",
+  "logging": {
+    "logLevel": {
+      "Microsoft.EntityFrameworkCore.Database.Command": "Warning",
+      "Microsoft.EntityFrameworkCore.Infrastructure": "Warning",
+      "default": "Warning"
+    },
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request;Dependency;Event"
+      },
+      "enableDependencyTracking": false
+    }
+  },
+  "extensions": {
+    "http": {
+      "routePrefix": "employee-fn-staff"
+    },
+    "queues": {
+      "maxDequeueCount": 1
+    }
+  }
+}

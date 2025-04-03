@@ -1,0 +1,265 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using BinusSchool.Common.Functions.Abstractions;
+using BinusSchool.Common.Functions.Handler;
+using BinusSchool.Common.Model;
+using BinusSchool.Data.Model.Scheduling.FnSchedule.ScheduleRealization;
+using BinusSchool.Persistence.SchedulingDb.Abstractions;
+using BinusSchool.Persistence.SchedulingDb.Entities.School;
+using BinusSchool.Persistence.SchedulingDb.Entities.User;
+using FirebaseAdmin.Messaging;
+using HandlebarsDotNet;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
+using SendGrid.Helpers.Mail;
+
+namespace BinusSchool.Scheduling.FnSchedule.ScheduleRealization.Notification
+{
+    public class SR5Notification : FunctionsNotificationHandler
+    {
+        private IDictionary<string, object> _notificationData;
+        private readonly ILogger<SR5Notification> _logger;
+        private readonly ISchedulingDbContext _dbContext;
+        private readonly IConfiguration _configuration;
+        private string _schoolName;
+
+        public SR5Notification(INotificationManager notificationManager, IConfiguration configuration, ILogger<SR5Notification> logger, ISchedulingDbContext dbContext, IDictionary<string, object> notificationData) :
+           base("SR5", notificationManager, configuration, logger)
+        {
+            _dbContext = dbContext;
+            _configuration = configuration;
+            _logger = logger;
+
+            PushNotificationData["action"] = "SR_CANCEL_BY_DATE";
+        }
+        protected override Task FetchNotificationConfig()
+        {
+            // TODO: get config from actual source
+            NotificationConfig = new NotificationConfig
+            {
+                EnEmail = true,
+                EnPush = new EnablePushConfig
+                {
+                    Mobile = true,
+                    Web = true
+                }
+            };
+
+            return Task.CompletedTask;
+        }
+
+        protected override Task Prepare()
+        {
+            try
+            {
+                var UrlBase = $"{_configuration.GetSection("ClientApp:Web:Host").Get<string>()}/schedule/teachertracking";
+
+                _notificationData = new Dictionary<string, object>
+                {
+                    { "UrlBase", UrlBase },
+                };
+
+                return Task.CompletedTask;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+
+                return Task.CompletedTask;
+            }
+        }
+
+        protected override async Task SendPushNotification()
+        {
+            var tokens = await _dbContext.Entity<MsUserPlatform>()
+                .Where(x
+                    => IdUserRecipients.Contains(x.IdUser) && x.FirebaseToken != null
+                    && NotificationConfig.EnPush.AllowedPlatforms.Contains(x.AppPlatform))
+                .Select(x => new { x.FirebaseToken, x.IdUser })
+                .ToListAsync(CancellationToken);
+
+            if (!EnsureAnyPushTokens(tokens.Select(e => e.FirebaseToken).ToList()))
+                return;
+
+            var Object = KeyValues.FirstOrDefault(e => e.Key == "EmailScheduleRealization").Value;
+            var EmailScheduleRealization = JsonConvert.DeserializeObject<GetEmailScheduleRealizationResult>(JsonConvert.SerializeObject(Object));
+
+            // _notificationData["datanotif"] = EmailScheduleRealization;
+
+            // var SendPushNotificationTaks = new List<Task>();
+            // foreach (var item in EmailTextbook.Textbooks)
+            // {
+            //     _notificationData["Link"] = $"{_notificationData["UrlBase"]}?Id={item.Id}";
+            //     PushNotificationData["id"] = item.Id;
+
+            //     var PushTemplate = Handlebars.Compile(NotificationTemplate.Push);
+            //     var PushBody = PushTemplate(_notificationData);
+
+            //     var TitleTemplate = Handlebars.Compile(NotificationTemplate.Title);
+            //     var TitleBody = TitleTemplate(_notificationData);
+
+
+            //     // NOTE: create MulticastMessage object to send push notification
+            //     var message = new MulticastMessage
+            //     {
+            //         Notification = new FirebaseAdmin.Messaging.Notification
+            //         {
+            //             Title = TitleBody,
+            //             Body = PushBody
+            //         },
+            //         Tokens = tokens.Where(e=>e.IdUser==item.IdUserApproval).Select(e => e.FirebaseToken).ToList(),
+            //         Data = (IReadOnlyDictionary<string, string>)PushNotificationData
+            //     };
+
+            //     GeneratedTitle = TitleBody;
+            //     GeneratedContent = PushBody;
+            //     await Task.WhenAll(SendPushNotificationTaks);
+            // }
+        }
+
+        protected override async Task SaveNotification(IEnumerable<string> idUserRecipients, bool isBlast)
+        {
+            var Object = KeyValues.FirstOrDefault(e => e.Key == "EmailScheduleRealization").Value;
+            var EmailScheduleRealization = JsonConvert.DeserializeObject<GetEmailScheduleRealizationResult>(JsonConvert.SerializeObject(Object));
+            var saveNotificationTasks = new List<Task>();
+
+            _notificationData["Staff"] = EmailScheduleRealization;
+
+            // foreach (var item in EmailScheduleRealization.IdRegularVenue)
+            // {
+            //     _notificationData["Link"] = $"{_notificationData["UrlBase"]}?Id={item.Id}";
+            //     PushNotificationData["id"] = item.Id;
+
+            //     var pushTemplate = Handlebars.Compile(NotificationTemplate.Push);
+            //     GeneratedContent = pushTemplate(_notificationData);
+
+            //     var pushTitle = Handlebars.Compile(NotificationTemplate.Title);
+            //     GeneratedTitle = pushTitle(_notificationData);
+
+            //     saveNotificationTasks.Add(NotificationManager.SaveNotification(
+            //     CreateNotificationHistory(
+            //         new List<string> { item.IdUserApproval },
+            //         isBlast,
+            //     GeneratedTitle ?? NotificationTemplate.Title,
+            //     GeneratedContent ?? NotificationTemplate.Push)));
+            //     await Task.WhenAll(saveNotificationTasks);
+            // }
+        }
+
+        protected override async Task SendEmailNotification()
+        {
+            _schoolName = await _dbContext.Entity<MsSchool>()
+                .Where(x => x.Id == IdSchool)
+                .Select(x => x.Name.ToUpper())
+                .FirstOrDefaultAsync(CancellationToken);
+                
+            var GetUser = await _dbContext.Entity<MsUser>()
+                .Where(x => IdUserRecipients.Contains(x.Id))
+                .Select(x => new
+                {
+                    x.Id,
+                    EmailAddress = new EmailAddress(x.Email, x.DisplayName),
+                    Name = x.DisplayName
+                })
+                .ToListAsync(CancellationToken);
+
+            if (!GetUser.Any())
+                return;
+
+            var sendEmailTasks = new List<Task>();
+
+            var Object = KeyValues.FirstOrDefault(e => e.Key == "EmailScheduleRealization").Value;
+            var EmailScheduleRealization = JsonConvert.DeserializeObject<GetEmailScheduleRealizationResult>(JsonConvert.SerializeObject(Object));
+
+            var GetUserSubstitute = await _dbContext.Entity<MsUser>()
+                .Where(x => EmailScheduleRealization.IdUserSubtituteTeacher.Contains(x.Id))
+                .Select(x => new
+                {
+                    x.Id,
+                    EmailAddress = new EmailAddress(x.Email, x.DisplayName),
+                    Name = x.DisplayName
+                })
+                .ToListAsync(CancellationToken);
+
+            // EmailScheduleRealization.IdRegularVenue.ForEach(e => e.Link = $"{_notificationData["UrlBase"]}?Id={e.Id}");
+
+            foreach(var ItemUser in GetUser)
+            {
+                // _notificationData["Data"] = EmailTextbook.Textbooks.Where(e=>e.IdUserApproval==ItemUser.Id);
+
+                _notificationData["ClassTeacher"] = ItemUser.Name;
+                _notificationData["Date"] = EmailScheduleRealization.Date?.ToString("dd MMMM yyyy");
+                _notificationData["Session"] = "Session " + EmailScheduleRealization.SessionID + " ( " + EmailScheduleRealization.SessionStartTime + " - " + EmailScheduleRealization.SessionEndTime + " ) ";
+                _notificationData["ClassID"] = EmailScheduleRealization.ClassID;
+                _notificationData["TeacherName"] = string.Join(",", GetUserSubstitute.Select(x => x.Name).ToList());
+                _notificationData["RegularVenue"] = EmailScheduleRealization.RegularVenueName;
+                _notificationData["SchoolName"] = _schoolName;
+
+                var emailTemplate = Handlebars.Compile(NotificationTemplate.Email);
+                var emailBody = emailTemplate(_notificationData);
+
+                var titleTemplate = Handlebars.Compile(NotificationTemplate.Title);
+                var titleBody = titleTemplate(_notificationData);
+
+                List<EmailAddress> listCc = new List<EmailAddress>();
+
+                if (IdSchool == "1")
+                {
+                    listCc = new List<EmailAddress>
+                    {
+                        new EmailAddress
+                        {
+                            Email = "sarthaningtyas@binus.edu",
+                            Name = "sarthaningtyas@binus.edu"
+                        },
+                        new EmailAddress
+                        {
+                            Email = "via@binus.edu",
+                            Name = "via@binus.edu"
+                        }
+                        ,
+                        new EmailAddress
+                        {
+                            Email = "lrassari@binus.edu",
+                            Name = "lrassari@binus.edu"
+                        }
+                    };
+                }
+
+                // NOTE: create SendGridMessage object to send email
+                var message = new SendGridMessage
+                {
+                    Subject = titleBody,
+                    Personalizations = new List<Personalization>
+                    {
+                        new Personalization
+                        {
+                            Tos = new List<EmailAddress>
+                            {
+                                ItemUser.EmailAddress
+                            },
+                            Ccs = listCc
+                        }
+                    }
+                };
+
+                if (NotificationTemplate.EmailIsHtml)
+                    message.HtmlContent = emailBody;
+                else
+                    message.PlainTextContent = emailBody;
+
+                sendEmailTasks.Add(NotificationManager.SendEmail(message));
+            }
+
+           
+
+            // send batch email
+            await Task.WhenAll(sendEmailTasks);
+        }
+    }
+}

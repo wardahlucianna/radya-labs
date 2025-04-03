@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<AzureFunctionsVersion>v4</AzureFunctionsVersion>
+		<Nullable>disable</Nullable>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.NET.Sdk.Functions" Version="4.6.0" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\BinusSchool.School.BLL\BinusSchool.School.BLL.csproj" />
+		<ProjectReference Include="..\BinusSchool.School.DAL\BinusSchool.School.DAL.csproj" />
+		<ProjectReference Include="..\BinusSchool.School.Kernel\BinusSchool.School.Kernel.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+		<Reference Include="Microsoft.CSharp" />
+	</ItemGroup>
+	<ItemGroup>
+		<None Update="host.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+		<None Update="local.settings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+		<Content Include="appsettings.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<Content Include="appsettings.*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</Content>
+		<None Update="Translations/*.*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+		</None>
+	</ItemGroup>
+</Project>

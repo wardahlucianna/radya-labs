@@ -1,0 +1,76 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.BLL", "BinusSchool.School.BLL\BinusSchool.School.BLL.csproj", "{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.DAL", "BinusSchool.School.DAL\BinusSchool.School.DAL.csproj", "{764A5494-B1F2-4DE9-9E67-091D4B494F0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.Kernel", "BinusSchool.School.Kernel\BinusSchool.School.Kernel.csproj", "{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.FnSchool.FrontEndAPI", "BinusSchool.School.FnSchool.FrontEndAPI\BinusSchool.School.FnSchool.FrontEndAPI.csproj", "{AC3EDFB9-B02E-4CF3-9BB3-33E705AE1C47}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.FnBanner.FrontEndAPI", "BinusSchool.School.FnBanner.FrontEndAPI\BinusSchool.School.FnBanner.FrontEndAPI.csproj", "{F138C6C8-C577-4207-BE50-67E3C799CE91}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.FnPeriod.FrontEndAPI", "BinusSchool.School.FnPeriod.FrontEndAPI\BinusSchool.School.FnPeriod.FrontEndAPI.csproj", "{D4E81177-B062-4C06-B9DD-6A3F215780D2}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.FnSubject.FrontEndAPI", "BinusSchool.School.FnSubject.FrontEndAPI\BinusSchool.School.FnSubject.FrontEndAPI.csproj", "{6BAD1CC8-F4AF-467B-AD4E-0316A1FC91C8}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.FnSync.BackEndAPI", "BinusSchool.School.FnSync.BackEndAPI\BinusSchool.School.FnSync.BackEndAPI.csproj", "{108897AE-39E6-4E51-AA30-A82ECC38BF67}"
+	ProjectSection(ProjectDependencies) = postProject
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E} = {82E4CA48-C31F-4A30-B7FE-34BF7F19985E}
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.School.FnLongRun.BackEndAPI", "BinusSchool.School.FnLongRun.BackEndAPI\BinusSchool.School.FnLongRun.BackEndAPI.csproj", "{573B28D6-1962-42C4-97F3-E6D8286128D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC3EDFB9-B02E-4CF3-9BB3-33E705AE1C47}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC3EDFB9-B02E-4CF3-9BB3-33E705AE1C47}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC3EDFB9-B02E-4CF3-9BB3-33E705AE1C47}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC3EDFB9-B02E-4CF3-9BB3-33E705AE1C47}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F138C6C8-C577-4207-BE50-67E3C799CE91}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F138C6C8-C577-4207-BE50-67E3C799CE91}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F138C6C8-C577-4207-BE50-67E3C799CE91}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F138C6C8-C577-4207-BE50-67E3C799CE91}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D4E81177-B062-4C06-B9DD-6A3F215780D2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D4E81177-B062-4C06-B9DD-6A3F215780D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D4E81177-B062-4C06-B9DD-6A3F215780D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D4E81177-B062-4C06-B9DD-6A3F215780D2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6BAD1CC8-F4AF-467B-AD4E-0316A1FC91C8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BAD1CC8-F4AF-467B-AD4E-0316A1FC91C8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BAD1CC8-F4AF-467B-AD4E-0316A1FC91C8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BAD1CC8-F4AF-467B-AD4E-0316A1FC91C8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{108897AE-39E6-4E51-AA30-A82ECC38BF67}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{108897AE-39E6-4E51-AA30-A82ECC38BF67}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{108897AE-39E6-4E51-AA30-A82ECC38BF67}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{108897AE-39E6-4E51-AA30-A82ECC38BF67}.Release|Any CPU.Build.0 = Release|Any CPU
+		{573B28D6-1962-42C4-97F3-E6D8286128D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{573B28D6-1962-42C4-97F3-E6D8286128D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{573B28D6-1962-42C4-97F3-E6D8286128D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{573B28D6-1962-42C4-97F3-E6D8286128D3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC8BF807-DD14-4F24-9CD3-71ECED4CF1F7}
+	EndGlobalSection
+EndGlobal

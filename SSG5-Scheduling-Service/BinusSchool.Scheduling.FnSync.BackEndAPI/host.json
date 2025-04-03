@@ -1,0 +1,25 @@
+{
+  "version": "2.0",
+  "functionTimeout": "-1",
+  "logging": {
+    "logLevel": {
+      "Microsoft.EntityFrameworkCore": "Information",
+      "default": "Information"
+    },
+    "applicationInsights": {
+      "samplingSettings": {
+        "isEnabled": true,
+        "excludedTypes": "Request"
+      }
+    }
+  },
+  "extensions": {
+    "http": {
+      "routePrefix": "scheduling-fn-sync"
+    },
+    "queues": {
+      "maxDequeueCount": 1,
+      "batchSize": 30
+    }
+  }
+}
