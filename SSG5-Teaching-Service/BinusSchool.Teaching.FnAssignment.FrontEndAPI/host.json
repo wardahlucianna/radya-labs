@@ -1,0 +1,23 @@
+{
+    "version": "2.0",
+    "logging": {
+      "logLevel": {
+        "Microsoft.EntityFrameworkCore": "Information",
+        "default": "Information"
+      },
+      "applicationInsights": {
+        "samplingSettings": {
+          "isEnabled": true,
+          "excludedTypes": "Request"
+        }
+      }
+    },
+    "extensions": {
+      "http": {
+        "routePrefix": "teaching-fn-assignment"
+      },
+      "queues": {
+        "maxDequeueCount": 1
+      }
+    }
+  }

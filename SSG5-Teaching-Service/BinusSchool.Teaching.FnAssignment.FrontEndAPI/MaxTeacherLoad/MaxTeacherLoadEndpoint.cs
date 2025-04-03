@@ -1,0 +1,80 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Net;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using BinusSchool.Common.Extensions;
+using BinusSchool.Common.Model;
+using BinusSchool.Data.Model;
+using BinusSchool.Data.Model.Teaching.FnAssignment.MaxTeacherLoad;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Azure.WebJobs;
+using Microsoft.Azure.WebJobs.Extensions.Http;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Attributes;
+using Microsoft.Azure.WebJobs.Extensions.OpenApi.Core.Enums;
+using Microsoft.OpenApi.Models;
+
+namespace BinusSchool.Teaching.FnAssignment.MaxTeacherLoad
+{
+    public class MaxTeacherLoadEndpoint
+    {
+        private const string _route = "assignment/teacher/max-load";
+        private const string _tag = "Teacher Max Load";
+
+        private readonly MaxTeacherLoadHandler _maxTeacherLoadHandler;
+
+        public MaxTeacherLoadEndpoint(MaxTeacherLoadHandler maxTeacherLoadHandler)
+        {
+            _maxTeacherLoadHandler = maxTeacherLoadHandler;
+        }
+
+        [FunctionName(nameof(MaxTeacherLoadEndpoint.GetMaxTeacherLoads))]
+        [OpenApiOperation(tags: _tag)]
+        [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiSecurity("authorization", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiParameter(nameof(CollectionRequest.Search), In = ParameterLocation.Query)]
+        [OpenApiParameter(nameof(CollectionRequest.Return), In = ParameterLocation.Query)]
+        [OpenApiParameter(nameof(CollectionRequest.Page), In = ParameterLocation.Query, Type = typeof(int))]
+        [OpenApiParameter(nameof(CollectionRequest.Size), In = ParameterLocation.Query, Type = typeof(int))]
+        [OpenApiParameter(nameof(CollectionRequest.OrderBy), In = ParameterLocation.Query)]
+        [OpenApiParameter(nameof(CollectionRequest.OrderType), In = ParameterLocation.Query)]
+        [OpenApiParameter(nameof(CollectionRequest.GetAll), In = ParameterLocation.Query, Type = typeof(bool))]
+        [OpenApiParameter(nameof(CollectionSchoolRequest.IdSchool), In = ParameterLocation.Query, Required = true)]
+        [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(GetTeacherMaxLoadResult))]
+        public Task<IActionResult> GetMaxTeacherLoads(
+           [HttpTrigger(AuthorizationLevel.Function, "get", Route = _route)] HttpRequest req,
+           CancellationToken cancellationToken)
+        {
+            return _maxTeacherLoadHandler.Execute(req, cancellationToken);
+        }
+
+        [FunctionName(nameof(MaxTeacherLoadEndpoint.GetMaxTeacherLoadDetail))]
+        [OpenApiOperation(tags: _tag)]
+        [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiSecurity("authorization", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiParameter("id", Required = true)]
+        [OpenApiResponseWithBody(HttpStatusCode.OK, "application/json", typeof(GetTeacherMaxLoadDetailResult))]
+        public Task<IActionResult> GetMaxTeacherLoadDetail(
+          [HttpTrigger(AuthorizationLevel.Function, "get", Route = _route + "/{id}")] HttpRequest req,
+          string id,
+          CancellationToken cancellationToken)
+        {
+            return _maxTeacherLoadHandler.Execute(req, cancellationToken, keyValues: "id".WithValue(id));
+        }
+
+        [FunctionName(nameof(MaxTeacherLoadEndpoint.UpdateMaxTeacherLoad))]
+        [OpenApiOperation(tags: _tag)]
+        [OpenApiSecurity("function_key", SecuritySchemeType.ApiKey, Name = "x-functions-key", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiSecurity("authorization", SecuritySchemeType.ApiKey, Name = "authorization", In = OpenApiSecurityLocationType.Header)]
+        [OpenApiRequestBody("application/json", typeof(AddTeacherMaxLoadRequest))]
+        [OpenApiResponseWithoutBody(HttpStatusCode.OK)]
+        public Task<IActionResult> UpdateMaxTeacherLoad(
+          [HttpTrigger(AuthorizationLevel.Function, "put", Route = _route)] HttpRequest req,
+          CancellationToken cancellationToken)
+        {
+            return _maxTeacherLoadHandler.Execute(req, cancellationToken);
+        }
+    }
+}
