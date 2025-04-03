@@ -1,0 +1,15 @@
+{
+  "IsEncrypted": false,
+  "Values": {
+    "AzureWebJobsStorage": "UseDevelopmentStorage=true",
+    "FUNCTIONS_WORKER_RUNTIME": "dotnet",
+    "AzureFunctionsJobHost__logging__LogLevel__Default": "Debug",
+    "AzureFunctionsJobHost__logging__LogLevel__Microsoft.Azure.WebJobs": "Warning",
+    "Version": "0.0.1"
+  },
+  "Host": {
+    // don't change this port
+    // see appsettings.Local.json on BinusSchool.Web for reference
+    "LocalHttpPort": 7121
+  }
+}

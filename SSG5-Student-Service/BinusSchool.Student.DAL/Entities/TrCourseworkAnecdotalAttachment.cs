@@ -1,0 +1,43 @@
+﻿using System.Collections.Generic;
+using BinusSchool.Persistence.Entities;
+using BinusSchool.Persistence.StudentDb.Abstractions;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+
+namespace BinusSchool.Persistence.StudentDb.Entities
+{
+    public class TrCourseworkAnecdotalAttachment : AuditEntity, IStudentEntity
+    {
+        public string IdCourseworkAnecdotalStudent { get; set; }
+        public string OriginalName { get; set; }
+        public int FileSize { get; set; }
+        public string FileName { get; set; }
+        public string Url { get; set; }
+        public string FileType { get; set; }
+
+        public virtual TrCourseworkAnecdotalStudent CourseworkAnecdotalStudent { get; set; }
+    }
+
+    internal class TrCourseworkAnecdotalAttachmentConfiguration : AuditEntityConfiguration<TrCourseworkAnecdotalAttachment>
+    {
+        public override void Configure(EntityTypeBuilder<TrCourseworkAnecdotalAttachment> builder)
+        {
+            builder.Property(p => p.Url).HasMaxLength(450);
+            builder.Property(p => p.OriginalName).HasMaxLength(100);
+            builder.Property(p => p.FileName).HasMaxLength(100);
+            builder.Property(p => p.FileType).HasMaxLength(10);
+            builder.Property(x => x.FileSize).HasColumnType("decimal(18,2)");
+
+            builder.HasOne(x => x.CourseworkAnecdotalStudent)
+             .WithMany(x => x.Attachments)
+             .HasForeignKey(fk => fk.IdCourseworkAnecdotalStudent)
+             .HasConstraintName("FK_TrCourseworkAnecdotalAttachment_TrCourseworkAnecdotalStudent")
+             .OnDelete(DeleteBehavior.Restrict)
+             .IsRequired();
+
+            base.Configure(builder); 
+
+        }
+    }
+
+}
