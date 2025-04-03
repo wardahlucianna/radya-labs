@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+	  <PackageReference Include="WindowsAzure.Storage" Version="9.3.3" />
+	  <PackageReference Include="ClosedXML" Version="0.95.4" />
+	  <PackageReference Include="Jace" Version="1.0.0" />
+    <PackageReference Include="Newtonsoft.Json.Schema" Version="3.0.13" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\BinusSchool.Document.DAL\BinusSchool.Document.DAL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Translations\exception.en-US.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Translations\exception.id-ID.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Translations\general.en-US.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="Translations\general.id-ID.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+</Project>

@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Document.BLL", "BinusSchool.Document.BLL\BinusSchool.Document.BLL.csproj", "{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Document.DAL", "BinusSchool.Document.DAL\BinusSchool.Document.DAL.csproj", "{764A5494-B1F2-4DE9-9E67-091D4B494F0E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BinusSchool.Document.Kernel", "BinusSchool.Document.Kernel\BinusSchool.Document.Kernel.csproj", "{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinusSchool.Document.FnDocument.FrontEndAPI", "BinusSchool.Document.FnDocument.FrontEndAPI\BinusSchool.Document.FnDocument.FrontEndAPI.csproj", "{B13CA6EC-BA94-4189-B864-CB1D2A079678}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BinusSchool.Document.FnSync.BackEndAPI", "BinusSchool.Document.FnSync.BackEndAPI\BinusSchool.Document.FnSync.BackEndAPI.csproj", "{CB94D8E8-86E6-4DDE-8906-BE3A9368BB9C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{82E4CA48-C31F-4A30-B7FE-34BF7F19985E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{764A5494-B1F2-4DE9-9E67-091D4B494F0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E5A74B93-1C7C-4CC6-BBB9-C08753D0D439}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13CA6EC-BA94-4189-B864-CB1D2A079678}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13CA6EC-BA94-4189-B864-CB1D2A079678}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13CA6EC-BA94-4189-B864-CB1D2A079678}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13CA6EC-BA94-4189-B864-CB1D2A079678}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CB94D8E8-86E6-4DDE-8906-BE3A9368BB9C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CB94D8E8-86E6-4DDE-8906-BE3A9368BB9C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CB94D8E8-86E6-4DDE-8906-BE3A9368BB9C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CB94D8E8-86E6-4DDE-8906-BE3A9368BB9C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AC8BF807-DD14-4F24-9CD3-71ECED4CF1F7}
+	EndGlobalSection
+EndGlobal

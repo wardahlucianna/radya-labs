@@ -1,0 +1,58 @@
+# ci fn dev
+
+trigger:
+  batch: true
+  branches:
+    include: 
+    - release/dev
+  paths:
+    include:
+    - BinusSchool.Attendance.FnLongRun.BackEndAPI/*
+    - BinusSchool.Attendance.BLL/FnLongRun/*
+    - BinusSchool.Attendance.DAL/*
+pr: none
+
+pool:
+  name: Azure Pipelines
+
+variables:
+  buildConfiguration: 'Release'
+
+steps:
+- checkout: self
+
+- task: UseDotNet@2
+  inputs:
+    packageType: 'sdk'
+    version: '6.x'
+
+- task: NuGetAuthenticate@1
+  inputs:
+    nuGetServiceConnections: 'azure-pipeline-artifact'
+
+- task: NuGetCommand@2
+  displayName: 'Nuget Restore'
+  inputs:
+    restoreSolution: '$(solution)'
+    feedsToUse: config
+    nugetConfigPath: NuGet.config
+    externalFeedCredentials: 'azure-pipeline-artifact'
+    
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet publish'
+  inputs:
+    command: publish
+    publishWebProjects: false
+    projects: '**/BinusSchool.Attendance.FnLongRun.BackEndAPI.csproj'
+    arguments: '-o publish_output/ -c Release'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+- task: ArchiveFiles@2
+  displayName: 'Archive files'
+  inputs:
+    rootFolderOrFile: 'publish_output/'
+    includeRootFolder: false
+
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact'
